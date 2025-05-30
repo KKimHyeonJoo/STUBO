@@ -5,7 +5,7 @@ from sentence_transformers import SentenceTransformer
 # 🔧 설정
 INDEX_PATH = "/Users/chaewon/Desktop/STUBO/ethics/pipeline/vectorstore_KoSimCSE/index.faiss"
 META_PATH = "/Users/chaewon/Desktop/STUBO/ethics/pipeline/vectorstore_KoSimCSE/questions_metadata.pkl"
-MODEL_NAME = "BM-K/KoSimCSE-roberta" # 테스트용으로 다른 모델로도 변경 가능
+MODEL_NAME = "jhgan/ko-sbert-nli" # 테스트용으로 다른 모델로도 변경 가능
 TOP_K = 5
 
 # 1. 모델 로딩

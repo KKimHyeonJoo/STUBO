@@ -8,7 +8,7 @@ from sentence_transformers import SentenceTransformer
 DATA_PATH = "/Users/chaewon/Desktop/STUBO/ethics/data/jsonl/parsing.jsonl"
 INDEX_PATH = "/Users/chaewon/Desktop/STUBO/ethics/pipeline/index.faiss"
 META_PATH = "/Users/chaewon/Desktop/STUBO/ethics/pipeline/questions_metadata.pkl"
-MODEL_NAME = "BM-K/KoSimCSE-roberta"
+MODEL_NAME = "jhgan/ko-sbert-nli"
 
 # 1. 데이터 불러오기
 with open(DATA_PATH, "r", encoding="utf-8") as f:

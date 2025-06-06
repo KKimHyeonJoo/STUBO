@@ -1,0 +1,12 @@
+<API Key>
+
+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
+
+
+# To activate this environment, use                                                                                                                                               
+#                                                                                                                                                                                 
+#     $ conda activate tagent15                                                                                                                                                   
+#
+# To deactivate an active environment, use
+#
+#     $ conda deactivate

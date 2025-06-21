@@ -3,9 +3,9 @@ import re
 import os
 
 # 폴더 경로 지정
-json_dir = 'save_json'
-answer_dir = 'answer_text'
-output_dir = 'save_json_with_answers'  # 결과 저장할 새 폴더
+json_dir = '/Users/chaewon/Desktop/STUBO/화법과 작문/save_json'
+answer_dir = '/Users/chaewon/Desktop/STUBO/화법과 작문/answer_text'
+output_dir = '/Users/chaewon/Desktop/STUBO/화법과 작문/save_json_with_answers'  # 결과 저장할 새 폴더
 
 os.makedirs(output_dir, exist_ok=True)
 

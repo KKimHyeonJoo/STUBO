@@ -1,10 +1,13 @@
+# 화작 문제 유형 태그 생성 코드
+# 문제 저장한 json 파일에 유형 태그까지 추가함
+
 import json
 import openai
 import os
 from tqdm import tqdm
 import re
 
-# ✅ OpenAI API 키 설정 (환경변수 사용 권장, 여기선 하드코딩)
+# OpenAI API 키 설정 (환경변수 사용 권장, 여기선 하드코딩)
 client = openai.OpenAI(api_key="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")
 
 # 문제 유형 분류 기준 프롬프트
@@ -18,7 +21,7 @@ TYPE_GUIDE = """
 5. 수정·보완 판단형
 
 다음 문제의 유형을 위 기준에 따라 판단하세요.
-⚠️ 출력은 반드시 숫자 하나만! (예: 2)
+출력은 반드시 숫자 하나만! (예: 2)
 """
 
 # GPT 기반 문제 유형 분류 함수
@@ -32,16 +35,16 @@ def classify_problem(problem_text):
             messages=[{"role": "user", "content": prompt}]
         )
         answer = response.choices[0].message.content.strip()
-        print(f"[📥 GPT 응답] {answer}")
+        print(f"[GPT 응답] {answer}")
         print("[DEBUG] 문제:", problem_text[:30], "... GPT 응답:", answer)
     except Exception as e:
-        print(f"❌ GPT 요청 오류: {e}")
+        print(f"GPT 요청 오류: {e}")
         return "분류 실패"
 
     # 정규식으로 숫자 하나 추출
     match = re.search(r"\b([1-5])\b", answer)
     if not match:
-        print(f"⚠️ 유형 번호 추출 실패! 응답 내용: {answer}")
+        print(f"유형 번호 추출 실패! 응답 내용: {answer}")
         return "분류 실패"
 
     number = match.group(1)
@@ -74,11 +77,11 @@ def process_file(filepath):
 # 폴더 안의 모든 화작 JSON 처리
 def process_all_files(folder_path):
     for filename in os.listdir(folder_path):
-        if filename.endswith("화작.json"):
+        if filename.endswith("03-화작.json"):
             full_path = os.path.join(folder_path, filename)
             process_file(full_path)
 
 # 실행
 if __name__ == "__main__":
-    process_all_files("save_json")
-    print("\n✅ 모든 화작 파일 처리 완료")
+    process_all_files("/Users/chaewon/Desktop/STUBO/화법과 작문/save_json")
+    print("\n모든 3월 화작 파일 처리 완료")

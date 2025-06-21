@@ -1,10 +1,13 @@
+# 추출한 텍스트 파일에서 문제 추출 후 json 파일로 저장하는 코드
+# type은 화작으로 고정
+
 import re
 import os
 import json
 
 # 연도와 시험 종류 리스트 정의
 years = [2021, 2022, 2023, 2024]
-exams = ['06', '09', '수능']
+exams = ['03']
 subject = '화작'
 
 def extract_problems(file_path):
@@ -52,8 +55,8 @@ def make_json(file_path, save_path):
     print(f"저장 완료: {save_path}")
 
 # 모든 연도/시험에 대해 반복 처리
-base_dir = '/Users/chaewon/Desktop/화법과 작문/save_text'
-save_dir = '/Users/chaewon/Desktop/화법과 작문/save_json'
+base_dir = '/Users/chaewon/Desktop/STUBO/화법과 작문/save_text'
+save_dir = '/Users/chaewon/Desktop/STUBO/화법과 작문/save_json'
 for year in years:
     for exam in exams:
         src = os.path.join(base_dir, f'{year}-{exam}-{subject}.txt')

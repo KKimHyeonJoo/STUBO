@@ -6,8 +6,8 @@ years = [2021, 2022, 2023, 2024]
 exams = ['06', '09', '수능']
 subject = '화작'
 
-base_pdf_dir = '/Users/chaewon/Desktop/화법과 작문/해설'
-base_txt_dir = '/Users/chaewon/Desktop/화법과 작문/answer_text'
+base_pdf_dir = '/Users/chaewon/Desktop/STUBO/화법과 작문/해설'
+base_txt_dir = '/Users/chaewon/Desktop/STUBO/화법과 작문/answer_text'
 
 pattern = re.compile(
     r'(3[5-9]|4[0-5])\..*?정답해설\s*:\s*(.*?)(정답\s*[①-⑤1-5])',

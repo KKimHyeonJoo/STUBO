@@ -33,7 +33,7 @@ from openai import OpenAI
 
 !pip install easyocr
 
-"""## GPT VISION"""
+"""## Easy OCR"""
 
 import os
 import re
@@ -49,9 +49,6 @@ from PIL import Image
 image_dir = "/content/drive/MyDrive/classified_images/비문학"
 client = OpenAI()
 reader = easyocr.Reader(['ko', 'en'], gpu=True)
-
-with open("/content/drive/MyDrive/STUBO/answers.json", "r", encoding="utf-8") as f:
-    true_answers = json.load(f)
 
 # ✅ 유니코드 정규화
 def normalize_filename(fn):

@@ -23,15 +23,8 @@ os.environ["OPENAI_API_KEY"] = "sk-proj-vv4YCTb1e3gvvJiO3sSyB3ZHEUpgBSMbQk7_Rb_P
 
 !pip install faiss-cpu
 
-import os
-import base64
-from PIL import Image
-from IPython.display import display
-from openai import OpenAI
-
 !pip install easyocr
 
-import os
 import re
 import json
 import cv2

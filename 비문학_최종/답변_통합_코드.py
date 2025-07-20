@@ -11,7 +11,6 @@ from google.colab import drive
 drive.mount('/content/drive')
 
 !pip install pytesseract PyPDF2
-
 !pip install pdfplumber pdf2image
 
 # Install Poppler utilities
@@ -19,13 +18,11 @@ drive.mount('/content/drive')
 !sudo apt-get install -y poppler-utils
 
 !pip install faiss-cpu
-
 !pip install easyocr
 
 import os
 os.environ["OPENAI_API_KEY"] = "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"
 
-import os
 import re
 import json
 import cv2

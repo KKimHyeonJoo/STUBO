@@ -62,7 +62,7 @@
 ---
 
 ## 📊 모델 성능 실험 결과
-<p align="center"> <img src="TAVE15기_STUBO_포스터.png" alt="STUBO 모델 성능 포스터" width="600"/> </p>
+![모델 성능 평가 포스터](TAVE15기_STUBO_포스터.png)
 
 ---
 ## 🛠️ 기술 스택

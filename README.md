@@ -68,7 +68,7 @@
 | OCR  | GPT-4o (Vision) / EasyOCR |
 | LLM  | OpenAI GPT-4o / GPT-4o-mini |
 | 벡터 검색 | FAISS, SentenceTransformers |
-| 백엔드 | Python, FastAPI |
+| 백엔드 | Python |
 | 프론트엔드 | Streamlit |
 | 모델 기반 파이프라인 | LangChain (RAG) |
 

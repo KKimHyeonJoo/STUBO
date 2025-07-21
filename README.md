@@ -137,7 +137,7 @@
 
 <img width="800" height="1029" alt="image" src="https://github.com/user-attachments/assets/aca9b743-5523-4b5e-9f7b-bda878c13731" />
 
-1. **문제 이미지 업로드**
+1. **지문/문제 이미지 업로드**
    - 국어 문제 스캔 이미지 선택
   
 2. **과목 선택 (문학/비문학/화법과 작문/언어와 매체)**

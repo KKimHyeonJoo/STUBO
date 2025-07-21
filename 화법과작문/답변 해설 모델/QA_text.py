@@ -28,7 +28,7 @@ prompt = PromptTemplate.from_template("""
 chain = LLMChain(llm=llm, prompt=prompt)
 
 # 4. JSON 파일 경로 지정
-BASE_PATH = "/Users/chaewon/Desktop/STUBO/화법과 작문/save_json_with_answers"
+BASE_PATH = "/Users/chaewon/Desktop/STUBOa/화법과작문/save_json_with_answers"
 filename = "2025-06-화작_with_answers.json"
 
 # 5. JSON 데이터 불러오기

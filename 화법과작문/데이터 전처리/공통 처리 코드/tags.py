@@ -83,5 +83,5 @@ def process_all_files(folder_path):
 
 # 실행
 if __name__ == "__main__":
-    process_all_files("/Users/chaewon/Desktop/STUBO/화법과 작문/save_json")
+    process_all_files("/Users/chaewon/Desktop/STUBO/화법과작문/save_json")
     print("\n 2025-06 화작 파일 처리 완료")

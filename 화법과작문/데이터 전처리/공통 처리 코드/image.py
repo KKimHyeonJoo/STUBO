@@ -15,10 +15,10 @@ file_paths = []
 for year in years:
     for exam in exams:
         filename = f"{year}-{exam}-{subject}.pdf"
-        path = f"/Users/chaewon/Desktop/STUBO/화법과 작문/data_a/{filename}"
+        path = f"/Users/chaewon/Desktop/STUBO/화법과작문/data_a/{filename}"
         file_paths.append(path)
 
-output_dir = "/Users/chaewon/Desktop/STUBO/화법과 작문/output_images"
+output_dir = "/Users/chaewon/Desktop/STUBO/화법과작문/output_images"
 
 for pdf_path in file_paths:
     if os.path.exists(pdf_path):

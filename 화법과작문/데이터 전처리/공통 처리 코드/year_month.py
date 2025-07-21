@@ -5,7 +5,7 @@ import os
 import re
 
 # 대상 폴더
-BASE_PATH = "/Users/chaewon/Desktop/STUBO/화법과 작문/save_json_with_answers"
+BASE_PATH = "/Users/chaewon/Desktop/STUBO/화법과작문/save_json_with_answers"
 
 # 수정할 대상 파일 패턴: 2021-03-화작_with_answers.json 등
 target_files = [

@@ -7,7 +7,7 @@ from langchain.docstore.document import Document
 from langchain.embeddings import SentenceTransformerEmbeddings
 
 # STEP 1: JSON 데이터 로드
-BASE_PATH = "/Users/chaewon/Desktop/STUBO/화법과 작문/save_json_with_answers"
+BASE_PATH = "/Users/chaewon/Desktop/STUBO/화법과작문/save_json_with_answers"
 all_data = []
 
 for filename in os.listdir(BASE_PATH):

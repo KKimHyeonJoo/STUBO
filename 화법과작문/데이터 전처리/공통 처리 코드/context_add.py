@@ -18,7 +18,7 @@ for page, problems in page_map.items():
         problem_to_page[num] = page
 
 # 폴더 경로
-BASE_PATH = "/Users/chaewon/Desktop/STUBO/화법과 작문/save_json_with_answers"
+BASE_PATH = "/Users/chaewon/Desktop/STUBO/화법과작문/save_json_with_answers"
 IMG_DIR = ""
 
 # 대상 파일들

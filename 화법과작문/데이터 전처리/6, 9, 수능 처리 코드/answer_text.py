@@ -1,3 +1,5 @@
+# 해설 PDF에서 텍스트 추출하는 코드
+
 import pdfplumber
 import re
 import os

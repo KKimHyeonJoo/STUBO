@@ -13,7 +13,7 @@ pdf_paths = []
 for year in years:
     for exam in exams:
         filename = f"{year}-{exam}-{subject}.pdf"
-        path = f"/Users/chaewon/Desktop/STUBO/화법과 작문/data_a/{filename}"
+        path = f"/Users/chaewon/Desktop/STUBO/화법과작문/data_a/{filename}"
         pdf_paths.append(path)
 
 # 텍스트 추출 함수
@@ -32,7 +32,7 @@ for pdf_path in pdf_paths:
         raw_text = extract_text_from_pdf(pdf_path)
         # txt 파일명 생성
         base_name = os.path.basename(pdf_path).replace('.pdf', '.txt')
-        save_path = os.path.join('/Users/chaewon/Desktop/STUBO/화법과 작문/save_text', base_name)
+        save_path = os.path.join('/Users/chaewon/Desktop/STUBO/화법과작문/save_text', base_name)
         with open(save_path, 'w', encoding='utf-8') as f:
             f.write(raw_text)
         print(f"텍스트 저장 완료: {save_path}")

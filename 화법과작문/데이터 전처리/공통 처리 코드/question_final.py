@@ -55,8 +55,8 @@ def make_json(file_path, save_path):
     print(f"저장 완료: {save_path}")
 
 # 모든 연도/시험에 대해 반복 처리
-base_dir = '/Users/chaewon/Desktop/STUBO/화법과 작문/save_text'
-save_dir = '/Users/chaewon/Desktop/STUBO/화법과 작문/save_json'
+base_dir = '/Users/chaewon/Desktop/STUBO/화법과작문/save_text'
+save_dir = '/Users/chaewon/Desktop/STUBO/화법과작문/save_json'
 for year in years:
     for exam in exams:
         src = os.path.join(base_dir, f'{year}-{exam}-{subject}.txt')

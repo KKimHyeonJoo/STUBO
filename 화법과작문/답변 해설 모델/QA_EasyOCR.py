@@ -1,3 +1,5 @@
+# EasyOCR로 이미지 텍스트 추출 + 원본 이미지까지 해서 모델에 넣어주는 코드
+
 import openai
 import os
 from glob import glob
@@ -6,23 +8,9 @@ import easyocr  # pip install easyocr
 
 client = openai.OpenAI(api_key="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")  # 여기에 본인의 키 입력
 
-image_dir = "/Users/chaewon/Desktop/STUBO/화법과 작문/output_images"
-question_nums = list(range(35, 46))
-question_files = []
-context_files = []
-for num in question_nums:
-    q_path = os.path.join(image_dir, f"2024-수능-화작_{num}.png")
-    if 35 <= num <= 37:
-        c_path = os.path.join(image_dir, "2024-수능-화작_p9.png")
-    elif 38 <= num <= 42:
-        c_path = os.path.join(image_dir, "2024-수능-화작_p10.png")
-    elif 43 <= num <= 45:
-        c_path = os.path.join(image_dir, "2024-수능-화작_p11.png")
-    else:
-        continue
-    if os.path.exists(q_path) and os.path.exists(c_path):
-        question_files.append(q_path)
-        context_files.append(c_path)
+image_dir = "/Users/chaewon/Desktop/STUBO/화법과작문/output_images"
+question_files = sorted(glob(os.path.join(image_dir, "2021-06-화작_42.png")))
+context_files = sorted(glob(os.path.join(image_dir, "2021-06-화작_p10.png")))
 
 reader = easyocr.Reader(['ko', 'en'])  # 한글 OCR
 
@@ -44,8 +32,8 @@ for q_path, c_path in zip(question_files, context_files):
     context_text = ocr_image(c_path)
     question_text = ocr_image(q_path)
 
-    #print("\n[OCR 결과 - 지문 텍스트]\n", context_text)
-    #print("\n[OCR 결과 - 문제 텍스트]\n", question_text)
+    print("\n[OCR 결과 - 지문 텍스트]\n", context_text)
+    print("\n[OCR 결과 - 문제 텍스트]\n", question_text)
 
     # 이미지 base64 인코딩
     c_b64 = encode_image(c_path)
@@ -62,6 +50,7 @@ for q_path, c_path in zip(question_files, context_files):
                         f"다음은 OCR로 추출한 문제와 선택지 텍스트입니다:\n{question_text}\n\n"
                         "위 두 이미지와 OCR 텍스트를 참고하여 문제의 정답과 해설을 알려줘. "
                         "정답 번호와 해설을 분리해서 알려줘. (예: 정답: ③)"
+                        "모든 선지에 대한 해설을 제공해줘."
                     )},
                     {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{c_b64}"}},
                     {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{q_b64}"}},

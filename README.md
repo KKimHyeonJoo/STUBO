@@ -114,14 +114,14 @@
 
 ## 🛠️ 기술 스택
 
-| 영역         | 사용 기술 |
-|--------------|-----------|
-| OCR          | GPT-4o (Vision), EasyOCR |
-| LLM          | GPT-4o, GPT-4o-mini |
-| 유사도 검색  | FAISS, SentenceTransformers |
-| 벡터 QA      | LangChain RetrievalQA |
-| 프론트엔드   | Streamlit |
-| 백엔드       | Python 3.10+ |
+| 구성 요소                | 사용 기술 / 프레임워크               |
+| -------------------- | --------------------------- |
+| **이미지 OCR**          | GPT-4o (Vision), EasyOCR    |
+| **LLM 기반 처리**        | OpenAI GPT-4o, GPT-4o-mini  |
+| **검색 및 유사도 분석**      | SentenceTransformers, FAISS |
+| **문서 기반 질의응답 (RAG)** | LangChain (RetrievalQA)     |
+| **웹 인터페이스**          | Streamlit                   |
+| **개발 언어**            | Python 3.10 이상              |
 
 ---
 

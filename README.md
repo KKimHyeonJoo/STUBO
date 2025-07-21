@@ -61,6 +61,7 @@
 
 ## 📂 프로젝트 구조
 
+<pre> 
 STUBO/
 ├── Streamlit_App.ipynb # 메인 웹 인터페이스 (Streamlit)
 ├── pipeline/
@@ -74,6 +75,7 @@ STUBO/
 │ └── output_images/ # OCR 대상 이미지 파일
 ├── assets/ # 예시 이미지 및 결과
 └── README.md
+</pre>
 
 ---
 

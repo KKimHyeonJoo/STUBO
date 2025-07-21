@@ -63,6 +63,9 @@
 
 ## 📊 모델 성능 실험 결과
 <p> <img src="TAVE15기_STUBO_포스터.png" alt="STUBO 모델 성능 포스터" width="500"/> </p>
+<img width="1234" height="580" alt="image" src="https://github.com/user-attachments/assets/345fcfb0-7693-4cf4-b33d-27613ad5b39c" />
+<img width="1235" height="617" alt="image" src="https://github.com/user-attachments/assets/4fbbbc3b-66aa-4e6d-b405-fe40392444df" />
+
 
 ---
 ## 🛠️ 기술 스택

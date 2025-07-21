@@ -108,6 +108,7 @@ STUBO/
 ├── corpus.json # 전체 기출 문제 데이터
 └── faiss_index/ # 벡터 인덱스 저장
 
+
 ---
 
 ## 📌 향후 발전 방향

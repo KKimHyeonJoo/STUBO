@@ -1,8 +1,7 @@
-
 import os
 import json
 
-BASE_PATH = "C:/Users/user/STUBO/언어와매체/save_json_tagged"
+BASE_PATH = "C:/Users/user/STUBO/언어와매체/save_json_tagged_temp"
 
 for filename in os.listdir(BASE_PATH):
     if filename.endswith(".json"):

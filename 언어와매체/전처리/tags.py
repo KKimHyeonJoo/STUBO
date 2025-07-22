@@ -58,7 +58,7 @@ def generate_tags(question, ty):
 # 메인 처리 함수
 def main():
     input_dir = "C:/Users/user/STUBO/언어와매체/save_json"          # 문제 원본 디렉토리
-    output_dir = "C:/Users/user/STUBO/언어와매체/save_json_tagged_temp"  # 태그 추가된 문제 저장 디렉토리
+    output_dir = "C:/Users/user/STUBO/언어와매체/save_json_tagged"  # 태그 추가된 문제 저장 디렉토리
     os.makedirs(output_dir, exist_ok=True)
 
     for filename in os.listdir(input_dir):

@@ -98,7 +98,10 @@
 │   └── outputs/                     # 화작 유사문제 추천용 벡터 인덱스
 
 ├── 언매/
-│   └── (구현 예정)                  # 
+│   ├── pipeline_langmedia.py       # 언어와 매체 전용 파이프라인
+│   ├── data/
+│   │   ├── output_images/           # 언매 유사 기출문제 이미지
+│   │   └── save_json_tagged/        # 최종 언매 문제 데이터
   
 └── README.md                        # 프로젝트 설명서
 </pre>

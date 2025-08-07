@@ -1,0 +1,12 @@
+# 환경변수 파일
+.env
+
+# VS Code 설정
+.vscode/
+
+# Python 캐시 파일
+__pycache__/
+*.pyc
+
+# 용량 큰 모델파일
+models/

@@ -1,0 +1,5 @@
+streamlit==1.47.0
+pillow==11.3.0
+openai==1.97.0
+tiktoken==0.9.0
+ipython==8.24.0

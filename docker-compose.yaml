@@ -1,0 +1,80 @@
+services:
+  subject_literature:
+    build:
+      context: .
+      dockerfile: subject_literature/Dockerfile
+    image: subject_lit:latest
+    ports:
+      - "8001:8000"
+    env_file:
+      - .env
+    volumes:
+      - ./models:/app/models
+      - ./subject_literature:/app/subject_literature
+      - ./subject_literature/faiss_index_examine:/app/subject_literature/faiss_index_examine
+      - ./subject_literature/data/output_images_문학:/app/subject_literature/data/output_images_문학/
+
+  subject_non_literature:
+    build:
+      context: .
+      dockerfile: subject_non_literature/Dockerfile
+    image: subject_nonlit:latest
+    ports:
+      - "8002:8000"
+    env_file:
+      - .env
+    volumes:
+      - ./models:/app/models
+      - ./subject_non_literature:/app/subject_non_literature
+      - ./subject_non_literature/data/output_images_비문학:/app/subject_non_literature/data/output_images_비문학/
+
+  subject_speechcomp:
+    build:
+      context: .
+      dockerfile: subject_speechcomp/Dockerfile
+    image: subject_speechcomp:latest
+    ports:
+      - "8003:8000"
+    env_file:
+      - .env
+    volumes:
+      - ./models:/app/models
+      - ./subject_speechcomp:/app/subject_speechcomp
+      - ./subject_speechcomp/data/output_images_화법과작문:/app/subject_speechcomp/data/output_images_화법과작문/
+  subject_langmedia:
+    build:
+      context: .
+      dockerfile: subject_langmedia/Dockerfile
+    image: subject_langmedia:latest
+    ports:
+      - "8004:8000"
+    env_file:
+      - .env
+    volumes:
+      - ./models:/app/models
+      - ./subject_langmedia:/app/subject_langmedia
+      - ./subject_langmedia/data/output_images_언어와매체:/app/subject_langmedia/data/output_images_언어와매체/
+
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    image: stubo-frontend:latest
+    ports:
+      - "8501:8501"
+    env_file:
+      - .env
+    volumes:
+      - ./models:/app/models"
+
+
+  gateway:
+    build:
+      context: .
+      dockerfile: gateway/Dockerfile
+    image: stubo-gateway:latest
+    ports:
+      - "8010:8010"
+    env_file:
+      - .env

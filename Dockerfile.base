@@ -1,0 +1,23 @@
+# Dockerfile.base
+FROM python:3.10-slim
+
+WORKDIR /app
+
+# 시스템 패키지 설치 (OCR, PDF용)
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    ffmpeg \
+    tesseract-ocr \
+    poppler-utils \
+    libgl1 \
+    && rm -rf /var/lib/apt/lists/*
+
+# base requirements만 먼저 복사
+COPY requirements_base.txt .
+
+# base 패키지 설치 (torch, faiss, transformers 등)
+RUN pip install -r requirements_base.txt

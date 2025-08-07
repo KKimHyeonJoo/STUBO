@@ -8,7 +8,7 @@
 
 - Git 설치: [https://git-scm.com/](https://git-scm.com/)
 - Docker Desktop 설치: [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/)
-- `.env` 파일과 `models` 폴더는 개별 전달 예정입니다.
+- `.env` 파일은 개별 전달 예정입니다.
 
 ---
 
@@ -53,25 +53,31 @@ STUBO/
 
 ---
 
-### 4. `models` 폴더 압축 해제
+### 4. 커맨드 라인(cmd) 실행 → 프로젝트 폴더로 이동
 
-전달받은 `models.zip`을 압축 해제하여, `models/` 폴더가 `STUBO` 폴더 하위에 있도록 배치합니다.
+예시:
+
+```bash
+cd C:\Users\user\MSA\STUBO
+```
+
+---
+
+### 5. 모델 다운로드 및 폴더 생성
+
+`save_model.py`를 실행하여 모델 파일을 자동 다운로드하고 `models/` 폴더를 생성합니다.
+
+```bash
+python -m save_model.py
+```
+
+> 실행 후 `STUBO/models/` 디렉토리가 생성되어야 합니다.
 
 ```
 STUBO/
 ├── models/
 │   ├── jhgan-ko-sroberta-multitask/
 │   └── kosimcse-roberta-multitask/
-```
-
----
-
-### 5. 커맨드 라인(cmd) 실행 → 프로젝트 폴더로 이동
-
-예시:
-
-```bash
-cd C:\Users\user\MSA\STUBO
 ```
 
 ---
@@ -128,3 +134,8 @@ http://localhost:8501
 | 언어와 매체 | 8004 | http://localhost:8004 |
 
 ---
+
+## 📌 기타 안내
+
+- `.env` 파일은 GitHub에 포함되어 있지 않으며, 별도로 전달됩니다.
+- `models` 폴더는 `save_model.py`를 통해 자동 다운로드 및 생성됩니다.

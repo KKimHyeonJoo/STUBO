@@ -63,7 +63,26 @@ cd C:\Users\user\MSA\STUBO
 
 ---
 
-### 5. 모델 다운로드 및 폴더 생성
+
+### 5. `.env`의 DOCKER_ENV 값 변경
+
+- **모델 다운로드 전 단계에서는** `.env` 파일의 `DOCKER_ENV` 값을 `false`로 설정해야 합니다.
+- 모델 다운로드가 끝난 후 **Docker 실행 전에** 다시 `true`로 변경합니다.
+
+예시:
+
+```env
+# 모델 다운로드 전
+DOCKER_ENV=false
+
+# 모델 다운로드 후
+DOCKER_ENV=true
+```
+
+이 값은 `config.py`의 `IS_DOCKER` 설정과 연결되어, 로컬 경로와 Docker 컨테이너 내부 경로를 전환하는 역할을 합니다.
+
+---
+### 6. 모델 다운로드 및 폴더 생성
 
 `save_model.py`를 실행하여 모델 파일을 자동 다운로드하고 `models/` 폴더를 생성합니다.
 
@@ -82,7 +101,7 @@ STUBO/
 
 ---
 
-### 6. Docker 이미지 빌드 (기본 requirements 설치)
+### 7. Docker 이미지 빌드 (기본 requirements 설치)
 
 ```bash
 docker build -t stubo-base:latest .
@@ -92,7 +111,7 @@ docker build -t stubo-base:latest .
 
 ---
 
-### 7. Docker Compose로 서비스별 이미지 빌드
+### 8. Docker Compose로 서비스별 이미지 빌드
 
 ```bash
 docker compose build
@@ -102,7 +121,7 @@ docker compose build
 
 ---
 
-### 8. Docker Compose로 전체 컨테이너 실행
+### 9. Docker Compose로 전체 컨테이너 실행
 
 ```bash
 docker compose up
@@ -112,7 +131,7 @@ docker compose up
 
 ---
 
-### 9. 서비스 접속 테스트
+### 10. 서비스 접속 테스트
 
 브라우저에서 다음 주소로 접속해 메인 화면이 잘 나오는지 확인하세요:
 
@@ -122,7 +141,7 @@ http://localhost:8501
 
 ---
 
-### 10. API 서버 상태 확인 (선택)
+### 11. API 서버 상태 확인 (선택)
 
 각 백엔드 API가 정상적으로 실행되고 있는지 개별 포트로 확인할 수 있습니다.
 

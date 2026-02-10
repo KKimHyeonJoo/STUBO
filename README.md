@@ -107,29 +107,73 @@
 </pre>
 
 ```mermaid
-flowchart LR
-  U[사용자] -->|이미지 업로드| FE[Streamlit UI]
+flowchart TB
+  %% Top
+  FE[Streamlit\nFrontend]
 
-  FE -->|HTTP POST /solve| GW[Gateway API]
-  GW -->|문학| LIT[문학 서비스 /process]
-  GW -->|비문학| NON[비문학 서비스 /process]
-  GW -->|화작| SPC[화작 서비스 /process]
-  GW -->|언매| LAM[언매 서비스 /process]
+  %% Middle
+  GW[API Gateway\nFastAPI\nsolve]
 
-  subgraph CORE[과목 서비스 공통 처리]
-    OCR[OCR] --> RAG[검색 RAG\nFAISS + Embeddings]
-    RAG --> GEN[정답 해설 생성\nGPT-4o]
-    GEN --> REC[유사문제 추천]
+  %% Up Down (요청 / 응답)
+  FE -->|지문 문항 이미지 업로드\nbase64 JSON| GW
+  GW -->|해설 유사기출 문제 응답\nJSON| FE
+
+  %% Bottom services
+  subgraph SVC[과목 서비스들\nDocker Compose]
+    direction LR
+    LIT[문학 서비스\nprocess]
+    NON[비문학 서비스\nprocess]
+    SPC[화작 서비스\nprocess]
+    LAM[언매 서비스\nprocess]
   end
 
-  LIT --> OCR
-  NON --> OCR
-  SPC --> OCR
-  LAM --> OCR
+  %% Gateway routing
+  GW -->|과목 라우팅| LIT
+  GW -->|과목 라우팅| NON
+  GW -->|과목 라우팅| SPC
+  GW -->|과목 라우팅| LAM
 
-  REC --> BANK[(기출 이미지 저장소)]
-  RAG --> VDB[(FAISS 벡터 DB)]
-  VDB --> EMB[Embeddings]
+  %% Service responses to gateway
+  LIT -->|결과 JSON| GW
+  NON -->|결과 JSON| GW
+  SPC -->|결과 JSON| GW
+  LAM -->|결과 JSON| GW
+
+  %% Common pipeline inside subject services
+  subgraph PIPE[과목 서비스 내부 공통 처리]
+    direction TB
+    OCR[OCR\nGPT 4o Vision EasyOCR CLOVA]
+    RAG[RAG 검색\nFAISS OpenAIEmbeddings]
+    GEN[정답 해설 생성\nGPT 4o]
+    REC[유사문제 추천\n임베딩 태그]
+    OCR --> RAG --> GEN --> REC
+  end
+
+  %% Each service uses the pipeline
+  LIT -. 사용 .-> OCR
+  NON -. 사용 .-> OCR
+  SPC -. 사용 .-> OCR
+  LAM -. 사용 .-> OCR
+
+  %% Data resources
+  subgraph DATA[데이터 자원]
+    direction LR
+    VDB[(FAISS 벡터 DB)]
+    BANK[(기출 이미지 저장소)]
+    TAG[(태그 메타데이터)]
+  end
+
+  RAG --> VDB
+  REC --> BANK
+  REC --> TAG
+
+  %% Styling
+  style FE fill:#ffffff,stroke:#333,stroke-width:1.5px
+  style GW fill:#ffffff,stroke:#333,stroke-width:1.5px
+  style SVC fill:#ffffff,stroke:#333,stroke-width:1px
+  style PIPE fill:#ffffff,stroke:#333,stroke-width:1px
+  style DATA fill:#ffffff,stroke:#333,stroke-width:1px
+
 
 ```
 

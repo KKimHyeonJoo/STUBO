@@ -107,79 +107,30 @@
 </pre>
 
 ```mermaid
-flowchart TD
-  %% User
-  U[사용자 브라우저] -->|지문/문항 이미지 업로드| FE[Streamlit Frontend\nport 8501]
+flowchart LR
+  U[사용자] -->|이미지 업로드| FE[Streamlit UI]
 
-  %% Optional: Local (Monolithic) path - current app.py behavior
-  FE -. 개발/로컬 모드 Direct Call .-> MONO[Frontend 내부 파이프라인 호출\nsubject_* 모듈 import]
+  FE -->|HTTP POST /solve| GW[Gateway API]
+  GW -->|문학| LIT[문학 서비스 /process]
+  GW -->|비문학| NON[비문학 서비스 /process]
+  GW -->|화작| SPC[화작 서비스 /process]
+  GW -->|언매| LAM[언매 서비스 /process]
 
-  %% MSA path
-  FE -->|HTTP POST /solve\nJSON base64| GW[Gateway API\nFastAPI /solve\nhttpx 프록시]
-  CFG[service_config.py\nSUBJECT_SERVICE_MAP\nenv 기반 URL 매핑] -.-> GW
-
-  %% Docker Compose Microservices
-  subgraph COMPOSE[Docker Compose 네트워크]
-    direction LR
-    GW -->|subject 문학| LIT[subject-literature\nFastAPI /process\ncontainer 8000\nhost 8001]
-    GW -->|subject 비문학| NON[subject-non_literature\nFastAPI /process\ncontainer 8000\nhost 8002]
-    GW -->|subject 화작| SPC[subject-speechcomp\nFastAPI /process\ncontainer 8000\nhost 8003]
-    GW -->|subject 언매| LAM[subject-langmedia\nFastAPI /process\ncontainer 8000\nhost 8004]
+  subgraph CORE[과목 서비스 공통 처리]
+    OCR[OCR] --> RAG[검색 RAG\nFAISS + Embeddings]
+    RAG --> GEN[정답 해설 생성\nGPT-4o]
+    GEN --> REC[유사문제 추천]
   end
 
-  %% Inside each subject service
-  subgraph CORE[과목 서비스 내부 공통 파이프라인]
-    direction TB
-    IN[Base64 이미지 입력] --> TMP[임시 이미지 파일 저장]
-    TMP --> OCR[OCR\nGPT-4o Vision 또는 EasyOCR/CLOVA]
-    OCR --> POST[후처리\n특수기호/구간 복원]
-    POST --> RAG[RAG\nFAISS 검색 + LangChain]
-    RAG --> GEN[정답/해설 생성\nGPT-4o]
-    GEN --> REC[유사문제 추천\n임베딩 + 태그]
-    REC --> OUT[JSON 응답]
-  end
+  LIT --> OCR
+  NON --> OCR
+  SPC --> OCR
+  LAM --> OCR
 
-  %% Service -> CORE
-  LIT --> IN
-  NON --> IN
-  SPC --> IN
-  LAM --> IN
-  MONO --> OCR
+  REC --> BANK[(기출 이미지 저장소)]
+  RAG --> VDB[(FAISS 벡터 DB)]
+  VDB --> EMB[Embeddings]
 
-  %% Data & Resources
-  subgraph DATA[Data and Resources]
-    direction LR
-    VDB[(FAISS Vector DB)]
-    EMB[Embeddings\nOpenAIEmbeddings\nSentenceTransformer]
-    TAG[(태그 메타데이터 JSON)]
-    BANK[(기출 이미지 저장소)]
-    MODELS[(models 폴더 공유 볼륨)]
-  end
-
-  %% CORE <-> DATA
-  RAG --> VDB
-  VDB --> RAG
-  VDB --> EMB
-  EMB --> VDB
-  REC --> TAG
-  REC --> BANK
-
-  %% Shared models used by services
-  LIT --> MODELS
-  NON --> MODELS
-  SPC --> MODELS
-  LAM --> MODELS
-
-  %% External APIs
-  subgraph EXT[External APIs]
-    OA[OpenAI API\nGPT-4o / Embeddings]
-    CLOVA[CLOVA OCR API]
-  end
-
-  OCR --> OA
-  GEN --> OA
-  EMB --> OA
-  OCR -. 선택 .-> CLOVA
 ```
 
 ## 🌟 기대 효과

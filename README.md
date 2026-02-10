@@ -107,7 +107,58 @@
 </pre>
 
 ---
+---mermaid
+flowchart TD
+    %% User Tier
+    U[사용자 브라우저] -->|이미지 업로드| FE([Streamlit Frontend])
 
+    %% Logic Tier
+    subgraph APP_LOGIC [Service Logic]
+        direction TB
+        FE -->|Direct Call| MONO[Monolithic Pipeline]
+        FE -->|API Call| GW{Gateway API /solve}
+        
+        subgraph MSA [Docker Compose Microservices]
+            direction LR
+            GW --> LIT[문학 서비스]
+            GW --> NON[비문학 서비스]
+            GW --> SPC[화작 서비스]
+            GW --> LAM[언매 서비스]
+        end
+    end
+
+    %% AI Core Tier
+    subgraph AI_CORE [AI Core Pipeline]
+        direction TB
+        OCR[Vision OCR] --> POST[후처리: 기호 및 구간 복원]
+        POST --> SOLVE[LLM: 정답 및 해설 생성]
+        SOLVE --> REC[Hybrid 유사문제 추천]
+    end
+
+    %% Data Tier
+    subgraph DATA_LAYER [Data & Resource Layer]
+        direction LR
+        VDB[(FAISS Vector DB)]
+        EMB[Embedding Model]
+        BANK[(Image Bank)]
+        META[(Tag Metadata)]
+        MODELS[[Local Models Storage]]
+    end
+
+    %% Connections
+    MONO & LIT & NON & SPC & LAM --> OCR
+    SOLVE <--> VDB
+    VDB <--> EMB
+    REC --- BANK
+    REC --- META
+    LIT & NON & SPC & LAM -.-> MODELS
+
+    %% Styling
+    style FE fill:#f9f,stroke:#333,stroke-width:2px
+    style GW fill:#fff4dd,stroke:#d4a017,stroke-width:2px
+    style AI_CORE fill:#e1f5fe,stroke:#01579b
+    style DATA_LAYER fill:#f5f5f5,stroke:#616161,stroke-dasharray: 5 5
+---
 ## 🌟 기대 효과
 
 - 수험생이 **혼자서도 문제를 깊이 있게 학습 가능** 

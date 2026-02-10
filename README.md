@@ -106,8 +106,7 @@
 └── README.md                        # 프로젝트 설명서
 </pre>
 
----
----mermaid
+```mermaid
 flowchart TD
     %% User Tier
     U[사용자 브라우저] -->|이미지 업로드| FE([Streamlit Frontend])
@@ -158,7 +157,7 @@ flowchart TD
     style GW fill:#fff4dd,stroke:#d4a017,stroke-width:2px
     style AI_CORE fill:#e1f5fe,stroke:#01579b
     style DATA_LAYER fill:#f5f5f5,stroke:#616161,stroke-dasharray: 5 5
----
+```
 ## 🌟 기대 효과
 
 - 수험생이 **혼자서도 문제를 깊이 있게 학습 가능** 

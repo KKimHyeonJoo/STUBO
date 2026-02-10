@@ -177,25 +177,26 @@ flowchart TB
 
 ```mermaid
 flowchart TB
-  IN[입력: 지문 이미지 + 문항 이미지] --> QOCR[문항 OCR: GPT-4o Vision]
-  IN --> POCR[지문 OCR: 분할 OCR(GPT-4o) + 정교화]
+  IN[입력 지문이미지 문항이미지] --> QOCR[문항 OCR GPT4o Vision]
+  IN --> POCR[지문 OCR 분할 OCR GPT4o 정교화]
 
-  POCR --> FIX1[특수기호/밑줄 구간 괄호 보정]
-  FIX1 --> FIX2[특수기호 검증/수정]
-  FIX2 --> FIX3[[A],[B] 등 지문 범위 삽입]
+  POCR --> FIX1[기호 밑줄 구간 복원]
+  FIX1 --> FIX2[기호 검증 수정]
+  FIX2 --> FIX3[지문 구간 표시 삽입]
 
-  QOCR --> RAG[해설 생성(RAG)]
+  QOCR --> RAG[해설 생성 RAG]
   FIX3 --> RAG
-  RAG --> RET[FAISS Retriever(MMR)]
-  RET --> LLM[GPT 해설/정답 생성]
+  RAG --> RET[FAISS 검색 MMR]
+  RET --> LLM[정답 해설 생성 GPT4o]
 
-  QOCR --> REC[유사문제 추천(Hybrid)]
-  REC --> TAG[GPT 태그 JSON]
-  REC --> SIM[FAISS 유사도 검색]
-  TAG --> RANK[가중 랭킹(태그 0.7 + 임베딩 0.3)]
+  QOCR --> REC[유사문제 추천 Hybrid]
+  REC --> TAG[태그 생성 GPT]
+  REC --> SIM[유사도 검색 FAISS]
+  TAG --> RANK[최종 랭킹 태그 07 임베딩 03]
   SIM --> RANK
-  RANK --> OUT[출력: 해설 + 유사문제(이미지 경로 포함)]
-  LLM --> OUT
+
+  LLM --> OUT[출력 해설 유사문제]
+  RANK --> OUT
 ```
 
 ## 🌟 기대 효과

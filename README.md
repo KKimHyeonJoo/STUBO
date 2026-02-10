@@ -175,30 +175,6 @@ flowchart TB
   style DATA fill:#ffffff,stroke:#333,stroke-width:1px
 ```
 
-```mermaid
-flowchart TB
-  IN[입력 지문이미지 문항이미지] --> QOCR[문항 OCR GPT4o Vision]
-  IN --> POCR[지문 OCR 분할 OCR GPT4o 정교화]
-
-  POCR --> FIX1[기호 밑줄 구간 복원]
-  FIX1 --> FIX2[기호 검증 수정]
-  FIX2 --> FIX3[지문 구간 표시 삽입]
-
-  QOCR --> RAG[해설 생성 RAG]
-  FIX3 --> RAG
-  RAG --> RET[FAISS 검색 MMR]
-  RET --> LLM[정답 해설 생성 GPT4o]
-
-  QOCR --> REC[유사문제 추천 Hybrid]
-  REC --> TAG[태그 생성 GPT]
-  REC --> SIM[유사도 검색 FAISS]
-  TAG --> RANK[최종 랭킹 태그 07 임베딩 03]
-  SIM --> RANK
-
-  LLM --> OUT[출력 해설 유사문제]
-  RANK --> OUT
-```
-
 ## 🌟 기대 효과
 
 - 수험생이 **혼자서도 문제를 깊이 있게 학습 가능** 

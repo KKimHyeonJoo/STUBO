@@ -174,7 +174,36 @@ flowchart TB
   style PIPE fill:#ffffff,stroke:#333,stroke-width:1px
   style DATA fill:#ffffff,stroke:#333,stroke-width:1px
 ```
+```mermaid
+flowchart TB
+  LIT[문학 서비스] --> P0[지문 이미지]
+  LIT --> Q0[문항 이미지]
 
+  P0 --> P1[지문 분할 parts 4 기본]
+  P1 --> P2[조각 OCR gpt4o]
+  P2 --> P3[OCR 병합]
+  P3 --> P4[정교화 기호 밑줄 삽입]
+  P4 --> P5[기호 검증 수정]
+  P5 --> P6[구간 표시 삽입]
+  P6 --> PT[지문 텍스트]
+
+  Q0 --> Q1[문항 OCR gpt4o]
+  Q1 --> QT[문항 텍스트]
+
+  PT --> RAG[해설 생성 RAG]
+  QT --> RAG
+  RAG --> RET[Retriever MMR k 5 threshold 05]
+  RET --> VDB[(FAISS)]
+  VDB --> EMB[OpenAIEmbeddings text embedding 3 small]
+  RAG --> ANS[정답 해설 gpt4o]
+
+  QT --> REC[유사문제 추천 Hybrid]
+  REC --> S1[FAISS 후보 검색 k 10]
+  REC --> S2[사용자 태그 gpt4o mini]
+  S1 --> SCORE[최종 점수 태그 07 임베딩 03]
+  S2 --> SCORE
+  SCORE --> OUT[유사문제 topK\n이미지 경로]
+```
 
 ## 🌟 기대 효과
 

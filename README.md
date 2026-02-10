@@ -204,6 +204,29 @@ flowchart TB
   S2 --> SCORE
   SCORE --> OUT[유사문제 topK\n이미지 경로]
 ```
+``` mermaid
+flowchart TD
+  QTXT["문항 텍스트(question_text)"] --> TAGGER["LLM 태깅 (gpt-4o-mini)"]
+  TAGGER --> UTAGS["사용자 태그 JSON"]
+
+  QTXT --> VEC["OpenAIEmbeddings (text-embedding-3-small)"]
+  VEC --> VDB[(FAISS)]
+  VDB --> CANDS["후보 문서 k=10\n(similarity_search_with_score)"]
+
+  CANDS --> MERGE["문서 태그 병합\n(source -> question_code -> tag_dict)"]
+  TAGDICT[(기출 태그 JSON)] --> MERGE
+
+  MERGE --> TS["태그 유사도 점수"]
+  CANDS --> ES["임베딩 검색 점수"]
+
+  TS --> FUSE["최종점수 = 0.7*태그 + 0.3*임베딩"]
+  ES --> FUSE
+
+  FUSE --> TOPK["Top-K 선택"]
+  TOPK --> PATH["이미지 경로 매핑\n문항코드.png / 지문코드_pN.png"]
+  IMG[(기출 이미지 폴더)] --> PATH
+  PATH --> OUT["추천 결과 JSON\n(problem_img, passage_img, final_score)"]
+```
 
 ## 🌟 기대 효과
 
